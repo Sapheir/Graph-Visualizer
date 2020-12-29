@@ -1,0 +1,244 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0em;
+    background-color: #f7ecbd;
+    display: flex;
+    align-items: center;
+    margin: 5vh;
+}
+text {
+    font-family: Lato, 'Segoe UI', 'Lucida Sans Unicode', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.graph-settings {
+    order: 0;
+}
+.graph-algorithms {
+    order: 2;
+}
+legend{
+	color: #000;
+	border-top: 1px solid #000;
+	border-left: 1px solid #000;
+	border-right: 1px solid #000;
+	border-radius: 5px 5px 0px 0px;
+	-webkit-border-radius: 5px 5px 0px 0px;
+	-moz-border-radius: 5px 5px 0px 0px;
+	background: #fff8dc;
+    padding: 0px 8px 3px 8px;
+    margin-left: 30px;
+	font-weight: 100;
+    font-size: 30px;
+    position: absolute;
+    z-index: 1;
+}
+fieldset {
+    position: relative;
+    margin-top: 30px;
+    border: 1px solid #000;
+    background-color: #fff8dc;
+    padding: 1vh;
+    border-radius: 10px;
+    padding-right: 50px;
+}
+form div {
+    margin-top: 20px;
+}
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 70px;
+    height: 30px;
+    margin: 0 20px;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+}
+input[type=checkbox] {
+    display: none;
+}
+.switch .slider::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f7ecbd;
+    border: 1px solid #C2C2C2;
+    border-radius: 1000px;
+    backface-visibility: hidden;
+    transition: background-color .3s;
+}
+.switch .slider::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background-color: #fff;
+    border: 1px solid #C2C2C2;
+    border-radius: 1000px;
+    backface-visibility: hidden;
+    transition: transform .3s;
+}
+.switch input[type=checkbox]:checked + .slider::after {
+    transform: translateX(100%);
+}
+input {
+    box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	border: 1px solid #C2C2C2;
+	box-shadow: 1px 1px 4px #EBEBEB;
+	-moz-box-shadow: 1px 1px 4px #EBEBEB;
+	-webkit-box-shadow: 1px 1px 4px #EBEBEB;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+    padding: 7px;
+    width: 100px;
+    outline: none;
+}
+input:focus {
+    border: 1px solid #000;
+}
+input:invalid {
+    border: 1px solid #f00;
+}
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+svg {
+    background: #fff8dc;
+    border: 1px solid #000;
+    border-radius: 10px;
+    display: block;
+    margin: auto;
+    order: 0;
+}
+svg text {
+    stroke: #000000;
+    stroke-width: 1.2px;
+}
+.error-text {
+    color: #f00;
+}
+.node {
+    fill:#cdc9bf;
+    stroke: #000;
+    stroke-width: 2px;
+    cursor: pointer;
+}
+
+.processing {
+    fill: #f00;
+}
+
+.processed {
+    fill:yellowgreen;
+}
+
+.edge {
+    stroke: #000;
+    stroke-width: 2px;
+}
+
+.directed {
+    marker-end: url(#black-arrow);
+}
+
+.min-spanning-tree {
+    stroke: yellowgreen;
+}
+
+.min-spanning-tree-directed {
+    stroke: yellowgreen;
+    marker-end: url(#green-arrow);
+}
+
+.fixed {
+    stroke-width: 4px;
+}
+
+@media (max-width: 1799px) {
+    body {
+        margin: 0;
+        padding: 0em;
+        background-color: #f7ecbd;
+        display: flex;
+        margin: 2vh;
+        flex-direction: column;
+    }
+    body form {
+        margin: 4vh;
+    }
+    svg {
+        order: -1;
+    }
+}
+
+@media (max-width: 500px) {
+    input {
+        width: 80px;
+    }
+    legend {
+        font-size: 15px;
+    }
+    fieldset {
+        margin-top: 15px;
+    }
+}

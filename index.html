@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph Algorithm Visualizer</title>
+    <link rel="shortcut icon" href="https://img.icons8.com/ios/2x/graph-clique.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form class="graph-settings">
+        <legend>Graph settings</legend>
+        <fieldset>
+            <div>
+                <span>Undirected</span>
+                <label class="switch">
+                    <input type="checkbox" id="toggle-directed">
+                    <span class="slider"></span>
+                </label>
+                <span>Directed</span>
+            </div>
+            <div>
+                <input type="text" id="add-node" name="add-node" placeholder="Node label">
+                <input type="button" id="add-node-button" value="Add node">
+                <label for="add-node-button" id="add-node-error" class="error-text"></label>
+            </div>
+            <div>
+                <input type="text" id="remove-node" name="remove-node" placeholder="Node label">
+                <input type="button" id="remove-node-button" value="Remove node">
+                <label for="remove-node-button" id="remove-node-error" class="error-text"></label>
+            </div>
+            <div>
+                <input type="text" name="add-edge-source" id="add-edge-source" placeholder="Source node">
+                <input type="text" name="add-edge-target" id="add-edge-target" placeholder="Target node">
+                <input type="number" name="add-edge-value" id="add-edge-value" placeholder="Value">
+                <input type="button" id="add-edge-button" value="Add edge">
+                <label for="add-edge-button" id="add-edge-error" class="error-text"></label>
+            </div>
+            <div>
+                <input type="text" name="update-edge-source" id="update-edge-source" placeholder="Source node">
+                <input type="text" name="update-edge-target" id="update-edge-target" placeholder="Target node">
+                <input type="number" name="update-edge-value" id="update-edge-value" placeholder="New value">
+                <input type="button" id="update-edge-button" value="Update edge">
+                <label for="update-edge-button" id="update-edge-error" class="error-text"></label>
+            </div>
+            <div>
+                <input type="text" name="remove-edge-source" id="remove-edge-source" placeholder="Source node">
+                <input type="text" name="remove-edge-target" id="remove-edge-target" placeholder="Target node">
+                <input type="button" id="remove-edge-button" value="Remove edge">
+                <label for="remove-edge-button" id="remove-edge-error" class="error-text"></label>
+            </div>
+        </fieldset>
+    </form>
+
+    <form class="graph-algorithms">
+        <legend>Graph algorithms</legend>
+        <fieldset>
+            <div>
+                <input type="text" name="dfs-root" id="dfs-root" placeholder="Root node">
+                <input type="button" id="dfs-button" value="Run DFS">
+                <label for="dfs-button" id="dfs-error" class="error-text"></label>
+            </div>
+            <div>
+                <input type="text" name="bfs-root" id="bfs-root" placeholder="Root node">
+                <input type="button" id="bfs-button" value="Run BFS">
+                <label for="bfs-button" id="bfs-error" class="error-text"></label>
+            </div>
+            <div>
+                <label for="dijkstra-root">Shortest path algorithm:</label>
+                <input type="text" name="dijkstra-root" id="dijkstra-root" placeholder="Root node">
+                <input type="button" id="dijkstra-button" value="Run Dijkstra">
+                <label for="dijkstra-button" id="dijkstra-error" class="error-text"></label>
+            </div>
+            <div>
+                <label for="kruskal-button">Minimum spanning tree algorithm:</label>
+                <input type="button" name="kruskal-button" id="kruskal-button" value="Run Kruskal">
+            </div>
+        </fieldset>
+    </form>
+
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="graph.js"></script>
+    <script src="ui.js"></script>
+</body>
+</html>
