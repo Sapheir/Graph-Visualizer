@@ -78,6 +78,13 @@ removeEdgeButton.addEventListener('click', function(){
     }
 });
 
+let removeGraphButton = document.getElementById('remove-graph-button');
+removeGraphButton.addEventListener('click', function(){
+    Graph.nodesList = [];
+    Graph.edgesList = [];
+    updateGraph(Graph);
+})
+
 let dfsRootNode = document.getElementById('dfs-root'), dfsButton = document.getElementById('dfs-button'), dfsError = document.getElementById('dfs-error');
 dfsRootNode.value = dfsError.innerHTML = '';
 dfsButton.addEventListener('click', async function(){
@@ -151,16 +158,36 @@ kruskalButton.addEventListener('click', async function(){
     await kruskal(Graph);
     enableButtons();
     canDragNodes = true;
-})
+});
+
+let pauseButton = document.getElementById('pause-button'), unpauseButton = document.getElementById('unpause-button');
+pauseButton.disabled = unpauseButton.disabled = true;
+pauseButton.addEventListener('click', function() {
+    paused = true;
+    pauseButton.disabled = true;
+    unpauseButton.disabled = false;
+});
+function unpauser() {
+    if (paused === false)
+        return;
+    return new Promise(resolve => unpauseButton.addEventListener('click', function(){
+            paused = false;
+            pauseButton.disabled = false;
+            unpauseButton.disabled = true;
+            resolve();
+        }));
+}
 
 function disableButtons() {
     addNodeButton.disabled = removeNodeButton.disabled = addEdgeButton.disabled = updateEdgeButton.disabled =
-    removeEdgeButton.disabled = dfsButton.disabled = bfsButton.disabled = dijkstraButton.disabled = kruskalButton.disabled = true;
+    removeEdgeButton.disabled = dfsButton.disabled = bfsButton.disabled = dijkstraButton.disabled = kruskalButton.disabled = unpauseButton.disabled = true;
+    pauseButton.disabled = false;
 }
 
 function enableButtons() {
     addNodeButton.disabled = removeNodeButton.disabled = addEdgeButton.disabled = updateEdgeButton.disabled =
     removeEdgeButton.disabled = dfsButton.disabled = bfsButton.disabled = dijkstraButton.disabled = kruskalButton.disabled = false;
+    pauseButton.disabled = true;
 }
 
 function clearInput() {
