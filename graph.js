@@ -352,6 +352,7 @@ function getAdjacencyList(Graph) {
 
     return adjacencyList;
 }
+let paused = false;
 const timer = ms => new Promise(res => setTimeout(res, ms));
 async function dfs(Graph, rootNodeLabel) {
     let rootNode = {label: rootNodeLabel};
@@ -359,6 +360,7 @@ async function dfs(Graph, rootNodeLabel) {
         throw 'Node does not exist';
     }
     let adjacencyList = getAdjacencyList(Graph), rootNodeIndex = findNode(Graph, rootNode);
+    await unpauser();
     await timer(500);
     setNodeState(Graph, rootNode, 'processing');
     for (let index = 0; index<adjacencyList[rootNodeIndex].length; index++) {
@@ -367,6 +369,7 @@ async function dfs(Graph, rootNodeLabel) {
             await dfs(Graph, nextNode.label);
         }
     }
+    await unpauser();
     await timer(500);
     setNodeState(Graph, rootNode, 'processed');
 }
@@ -379,25 +382,22 @@ async function bfs(Graph, rootNodeLabel) {
     let adjacencyList = getAdjacencyList(Graph), rootNodeIndex = findNode(Graph, rootNode);
     let queue = [];
     queue.push(Graph.nodesList[rootNodeIndex]);
+    await unpauser();
     await timer(500);
     setNodeState(Graph, Graph.nodesList[rootNodeIndex], 'processing');
     while (queue.length > 0) {
         let currentNode = queue[0];
         queue.shift();
-        let unvisitedCount = 0;
-        for (let index = 0; index<adjacencyList[currentNode.index].length; index++){
-            let nextNode = Graph.nodesList[adjacencyList[currentNode.index][index][0]];
-                if (nextNode.state == 'unvisited')
-                    unvisitedCount++;
-        }
         for (let index = 0; index<adjacencyList[currentNode.index].length; index++) {
             let nextNode = Graph.nodesList[adjacencyList[currentNode.index][index][0]];
             if (nextNode.state == 'unvisited') {
                 queue.push(nextNode);
+                await unpauser();
                 await timer(500);
                 setNodeState(Graph, nextNode, 'processing');
             }
         }
+        await unpauser();
         await timer(500);
         setNodeState(Graph, currentNode, 'processed');
     }
@@ -416,6 +416,7 @@ async function dijkstra(Graph, rootNodeLabel) {
     Graph.nodesList[rootNodeIndex].distance = 0;
     let queue = [];
     queue.push(Graph.nodesList[rootNodeIndex]);
+    await unpauser();
     await timer(500);
     setNodeState(Graph, Graph.nodesList[rootNodeIndex], 'processing');
     while (queue.length > 0) {
@@ -432,12 +433,14 @@ async function dijkstra(Graph, rootNodeLabel) {
             let nextNode = Graph.nodesList[adjacencyList[currentNode.index][index][0]], edgeValue = adjacencyList[currentNode.index][index][1];
             let newDistance = currentNode.distance+edgeValue;
             if (nextNode.distance == -1 || newDistance < nextNode.distance) {
+                await unpauser();
                 await timer(500);
                 nextNode.distance = newDistance;
                 setNodeState(Graph, nextNode, 'processing');
                 queue.push(nextNode);
             }
         }
+        await unpauser();
         await timer(500);
         setNodeState(Graph, currentNode, 'processed');
     }
@@ -475,16 +478,19 @@ async function kruskal(Graph) {
     let minSpanningTreeCost = 0;
     for (let index = 0; index<sortedEdges.length; index++) {
         let value = sortedEdges[index][0], sourceNode = sortedEdges[index][1], targetNode = sortedEdges[index][2];
+        await unpauser();
         await timer(500);
         setNodeState(Graph, sourceNode, 'processing');
         setNodeState(Graph, targetNode, 'processing');
         if (DSU.find(sourceNode.index) != DSU.find(targetNode.index)) {
             DSU.unite(sourceNode.index, targetNode.index);
+            await unpauser();
             await timer(500);
             let currentEdge = {source: sourceNode.label, target: targetNode.label};
             setEdgeState(Graph, currentEdge, true);
             minSpanningTreeCost += value;
         }
+        await unpauser();
         await timer(500);
         setNodeState(Graph, sourceNode, 'unvisited');
         setNodeState(Graph, targetNode, 'unvisited');
