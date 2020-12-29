@@ -8,3 +8,4 @@ Live demo: https://sapheir.github.io/Graph-Visualizer
 #### • Nodes can be added/removed from the graph
 #### • Edges can be added/updated/removed from the graph
 #### • Depth-first search, Breadth-first search, Dijkstra's shortest path algorithm and Kruskal's minimum spanning tree algorithm can be viewed on the graph
+#### • The algorithm animations can be paused/unpaused
